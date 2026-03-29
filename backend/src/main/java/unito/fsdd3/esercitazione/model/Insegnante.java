@@ -13,7 +13,6 @@ public class Insegnante {
     private Integer id;
     private String nome;
     private String cognome;
-    private String corso;
 
     public Integer getId() {
         return id;
