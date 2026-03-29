@@ -13,6 +13,7 @@ public class Studente {
     private Integer id;
     private String nome;
     private String cognome;
+    private String genere;
 
     public Integer getId() {
         return id;
@@ -36,5 +37,13 @@ public class Studente {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    public String getGenere(){
+        return genere;
+    }
+
+    public void setGenere(String genere){
+        this.genere = genere;
     }
 }
