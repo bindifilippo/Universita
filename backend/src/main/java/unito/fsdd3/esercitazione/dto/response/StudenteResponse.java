@@ -10,10 +10,7 @@ public class StudenteResponse {
     public StudenteResponse() {
     }
 
-    public StudenteResponse(Integer id, String nome, String cognome, String genere) {
-        this.id = id;
-        this.nome = nome;
-        this.cognome = cognome;
+    public void setGenere(String genere) {
         this.genere = genere;
     }
 
@@ -43,9 +40,5 @@ public class StudenteResponse {
 
     public String getGenere() {
         return genere;
-    }
-
-    public void setGenere(String genere) {
-        this.genere = genere;
     }
 }

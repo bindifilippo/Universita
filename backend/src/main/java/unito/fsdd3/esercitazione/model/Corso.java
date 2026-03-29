@@ -17,7 +17,13 @@ public class Corso {
     private String titolo;
     private Integer annoCreazione;
 
+    //buona pratica costruttore vuoto per JPA
     public Corso() {
+    }
+
+    public Corso(String titolo, Integer annoCreazione){
+        this.titolo = titolo;
+        this.annoCreazione = annoCreazione;
     }
 
     public Integer getId() {
@@ -37,11 +43,6 @@ public class Corso {
     }
 
     public void setAnnoCreazione(Integer annoCreazione) {
-        this.annoCreazione = annoCreazione;
-    }
-
-    public Corso(String titolo, Integer annoCreazione) {
-        this.titolo = titolo;
         this.annoCreazione = annoCreazione;
     }
 }

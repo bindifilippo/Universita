@@ -16,12 +16,6 @@ public class StudenteRequest {
     public StudenteRequest() {
     }
 
-    public StudenteRequest(String nome, String cognome, String genere) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.genere = genere;
-    }
-
     public String getNome() {
         return nome;
     }

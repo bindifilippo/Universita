@@ -15,6 +15,16 @@ public class Studente {
     private String cognome;
     private String genere;
 
+    //buona pratica costruttore vuoto per JPA
+    public Studente(){
+    }
+
+    public Studente(String nome, String cognome, String genere){
+        this.nome = nome;
+        this.cognome = cognome;
+        this.genere = genere;
+    }
+
     public Integer getId() {
         return id;
     }

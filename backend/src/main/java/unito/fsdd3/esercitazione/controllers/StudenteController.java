@@ -82,10 +82,6 @@ public class StudenteController {
 
     private StudenteResponse toResponse(Studente studente) {
         return new StudenteResponse(
-                studente.getId(),
-                studente.getNome(),
-                studente.getCognome(),
-                studente.getGenere()
-        );
+        ); 
     }
 }

@@ -14,6 +14,14 @@ public class Insegnante {
     private String nome;
     private String cognome;
 
+    public Insegnante(){
+    }
+
+    public Insegnante(String nome, String cognome){
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+
     public Integer getId() {
         return id;
     }
