@@ -2,7 +2,6 @@
 //Grazie a JPA la classe viene collegata anche a una tabella del database.
 package unito.fsdd3.esercitazione.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
