@@ -1,13 +1,13 @@
-package unito.fsdd3.esercitazione.controllers;
+package unito.fsdd3.server.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import unito.fsdd3.esercitazione.dto.request.InsegnanteRequest;
-import unito.fsdd3.esercitazione.dto.response.InsegnanteResponse;
-import unito.fsdd3.esercitazione.model.Insegnante;
-import unito.fsdd3.esercitazione.service.InsegnanteService;
 import jakarta.validation.Valid;
+import unito.fsdd3.server.dto.request.InsegnanteRequest;
+import unito.fsdd3.server.dto.response.InsegnanteResponse;
+import unito.fsdd3.server.model.Insegnante;
+import unito.fsdd3.server.service.InsegnanteService;
 
 import java.util.List;
 

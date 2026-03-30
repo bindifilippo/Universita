@@ -1,4 +1,4 @@
-package unito.fsdd3.esercitazione.model;
+package unito.fsdd3.server.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,23 +6,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Studente {
+public class Insegnante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
     private String cognome;
-    private String genere;
 
-    //buona pratica costruttore vuoto per JPA
-    public Studente(){
+    public Insegnante(){
     }
 
-    public Studente(String nome, String cognome, String genere){
+    public Insegnante(String nome, String cognome){
         this.nome = nome;
         this.cognome = cognome;
-        this.genere = genere;
     }
 
     public Integer getId() {
@@ -47,13 +44,5 @@ public class Studente {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
-    }
-
-    public String getGenere(){
-        return genere;
-    }
-
-    public void setGenere(String genere){
-        this.genere = genere;
     }
 }

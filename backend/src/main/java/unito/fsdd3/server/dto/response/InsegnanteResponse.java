@@ -1,21 +1,26 @@
-package unito.fsdd3.esercitazione.dto.request;
+package unito.fsdd3.server.dto.response;
 
-import jakarta.validation.constraints.NotBlank;
+public class InsegnanteResponse {
 
-public class InsegnanteRequest {
-
-    @NotBlank(message = "Il nome non può essere vuoto")
+    private Integer id;
     private String nome;
-
-    @NotBlank(message = "Il cognome non può essere vuoto")
     private String cognome;
 
-    public InsegnanteRequest() {
+    public InsegnanteResponse() {
     }
 
-    public InsegnanteRequest(String nome, String cognome) {
+    public InsegnanteResponse(Integer id, String nome, String cognome) {
+        this.id = id;
         this.nome = nome;
         this.cognome = cognome;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNome() {

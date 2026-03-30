@@ -1,4 +1,4 @@
-package unito.fsdd3.esercitazione.dto.request;
+package unito.fsdd3.server.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

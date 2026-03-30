@@ -1,4 +1,4 @@
-package unito.fsdd3.esercitazione.dto.response;
+package unito.fsdd3.server.dto.response;
 
 public class CorsoResponse {
 

@@ -1,8 +1,9 @@
-package unito.fsdd3.esercitazione.service;
+package unito.fsdd3.server.service;
 
 import org.springframework.stereotype.Service;
-import unito.fsdd3.esercitazione.model.Insegnante;
-import unito.fsdd3.esercitazione.repository.InsegnanteRepository;
+
+import unito.fsdd3.server.model.Insegnante;
+import unito.fsdd3.server.repository.InsegnanteRepository;
 
 import java.util.List;
 import java.util.Optional;

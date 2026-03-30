@@ -1,6 +1,6 @@
 //file che rappresenta il dato principale dell'applicazione, rappresentato come classe java con tre proprietà.
 //Grazie a JPA la classe viene collegata anche a una tabella del database.
-package unito.fsdd3.esercitazione.model;
+package unito.fsdd3.server.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

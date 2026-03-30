@@ -1,4 +1,4 @@
-package unito.fsdd3.esercitazione.security;
+package unito.fsdd3.server.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
