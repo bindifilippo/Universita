@@ -1,11 +1,14 @@
 type CardCorsoProps = {
-  level: string
-  title: string
-  description: string
-  buttonText: string
+    id: number
+    level: string
+    title: string
+    description: string
+    buttonText: string
+    status: string
+    onChangeStatus: (id: number) => void
 }
 
-export default function CardCorso ({level, title, description, buttonText}:CardCorsoProps){
+export default function CardCorso ({id, level, title, description, buttonText, status, onChangeStatus}:CardCorsoProps){
     return (   
         <div className="cardCorso">
             <div className="mb-4">
@@ -22,9 +25,15 @@ export default function CardCorso ({level, title, description, buttonText}:CardC
             {description}
             </p>
 
-            <button className="button">
-            {buttonText}
-            </button>
+           <div className="flex items-center justify-between">
+                <button className="button" onClick={() => onChangeStatus(id)}>
+                {buttonText}
+                </button>
+
+                <span className="rounded-full bg-blue-100 px-3 py-2 text-xs font-medium">
+                {status}
+                </span>
+            </div>
         </div>
     )
 }

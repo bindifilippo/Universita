@@ -26,7 +26,6 @@ stili globali
 
 @layer components { 
     .cardCorso {
-        width: 100%;
         max-width: 24rem;
         border-radius: 1rem;
         background-color: white;
