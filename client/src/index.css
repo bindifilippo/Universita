@@ -1,0 +1,26 @@
+/*
+stili globali
+    reset CSS
+    body, html, :root
+    font globali
+    colori base
+*/
+@import "tailwindcss";
+
+@layer base { 
+
+ }
+
+@layer components { 
+    .cardCorso {
+        width: 100%;
+        max-width: 24rem;
+        border-radius: 1rem;
+        background-color: white;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+                    0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border: 1px solid rgb(229 231 235);
+    }
+ }
+ 
