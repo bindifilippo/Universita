@@ -8,8 +8,21 @@ stili globali
 @import "tailwindcss";
 
 @layer base { 
+    * {
+    box-sizing: border-box;
+    }
 
- }
+  html, body, #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0px;
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+}
 
 @layer components { 
     .cardCorso {
@@ -21,6 +34,23 @@ stili globali
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
                     0 2px 4px -2px rgb(0 0 0 / 0.1);
         border: 1px solid rgb(229 231 235);
+    }
+
+    .button {
+        border-radius: 0.75rem;
+        background-color: #111827;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
+    .button:hover{
+        background-color: #49556e;
     }
  }
  
