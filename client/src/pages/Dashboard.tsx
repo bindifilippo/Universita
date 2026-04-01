@@ -3,7 +3,7 @@ import CardCorso from "../components/CardCorso";
 export default function Dashboard (){
     return( 
     <> 
-        <div> Titolo pagina </div>
+        <div className="pt-12"> Titolo pagina </div>
         <div className="min-h-screen bg-gray-100 flex items-center justify-center gap-6 p-6">
             <CardCorso
                 level="Livello B1"
