@@ -7,10 +7,6 @@ export default function Header() {
         </h1>
 
         <div className="flex items-center gap-6">
-          <button className="text-sm font-medium text-gray-700 hover:text-gray-900 transition">
-            Profilo
-          </button>
-
           <button className="button">
             Esci
           </button>

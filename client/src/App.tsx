@@ -1,15 +1,14 @@
 //import { useState } from 'react'
 import './App.css'
-import Footer from './components/Footer'
-import Header from './components/Header'
 import Dashboard from './pages/Dashboard'
+import Layout from './pages/Layout'
 
 function App() {
   return (
     <>
-      <Header />
+    <Layout>
       <Dashboard />
-      <Footer />
+    </Layout>
     </> 
    
   )
