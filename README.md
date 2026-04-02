@@ -2,7 +2,7 @@
 
 ## Short intro
 
-**Universita** is a full-stack web application designed as a university management project.  
+**Universita** is a full-stack web application designed as a university management utility tool.  
 It combines a modern frontend interface with a Java backend to model and manage core academic entities such as courses, teachers, and students.
 
 The project is structured to reflect a real-world full-stack workflow, with a clear separation between presentation, business logic, persistence, and security.
