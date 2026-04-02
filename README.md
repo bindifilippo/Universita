@@ -1,4 +1,4 @@
-# Universita
+# University
 
 ## Short intro
 
