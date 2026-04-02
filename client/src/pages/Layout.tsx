@@ -10,7 +10,7 @@ type LayoutProps = {
 };
 
 export default function Layout({ children }: LayoutProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-gray-100">
