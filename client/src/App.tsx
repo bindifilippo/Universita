@@ -1,7 +1,6 @@
-//import { useState } from 'react'
 import './App.css'
 import Dashboard from './pages/Dashboard'
-import Layout from './pages/Layout'
+import Layout from './components/Layout'
 
 function App() {
   return (

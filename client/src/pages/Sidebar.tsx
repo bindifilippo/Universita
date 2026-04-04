@@ -15,9 +15,6 @@ export default function Sidebar({ isOpen }: SidebarProps) {
           Corsi
         </a>
         <a href="#" className="text-gray-700 hover:text-black">
-          Studenti
-        </a>
-         <a href="#" className="text-gray-700 hover:text-black">
           Profilo
         </a>
       </nav>
