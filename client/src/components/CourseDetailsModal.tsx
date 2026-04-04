@@ -64,14 +64,14 @@ export default function CourseDetailsModal({
             {course.description}
           </p>
         </div>
-
+        
+        <h3 className="mb-1 text-sm font-semibold text-gray-800">
+            Studenti
+        </h3>
+        
         <div className="mb-6 rounded-xl border border-gray-200 bg-gray-50 p-4">
-          <h3 className="mb-1 text-sm font-semibold text-gray-800">
-            Elenco studenti
-          </h3>
-
           <p className="mb-4 text-sm text-gray-600">
-            Studenti iscritti: {course.students.length}
+            Numero iscritti: {course.students.length}
           </p>
 
           {course.students.length === 0 ? (
@@ -84,7 +84,7 @@ export default function CourseDetailsModal({
                 {course.students.map((student) => (
                   <li
                     key={student.id}
-                    className="rounded-lg bg-white px-3 py-2 text-sm text-gray-700 shadow-sm"
+                    className="rounded-lg bg-white px-3 py-2 text-sm text-gray-70 border border-gray-200"
                   >
                     {student.firstName} {student.lastName}
                   </li>
