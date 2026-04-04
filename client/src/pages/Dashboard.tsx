@@ -1,34 +1,59 @@
 import { useState } from "react";
 import CardCorso from "../components/CardCorso";
 
+type Student = {
+  id: number;
+  firstName: string;
+  lastName: string;
+};
+
+type Course = {
+  id: number;
+  level: string;
+  title: string;
+  description: string;
+  status: string;
+  students: Student[];
+};
+
 export default function Dashboard() {
-  const [cards, setCards] = useState([
+  const [cards, setCards] = useState<Course[]>([
     {
       id: 1,
       level: "A1",
       title: "Tedesco per principianti",
-      description:
-        "Corso base di grammatica e vocaboli",
-      buttonText: "Esplora",
+      description: "Corso base di grammatica e vocaboli",
       status: "Da iniziare",
+      students: [
+        { id: 1, firstName: "Mario", lastName: "Rossi" },
+        { id: 2, firstName: "Giulia", lastName: "Bianchi" },
+      ],
     },
     {
       id: 2,
       level: "C1",
       title: "Tedesco avanzato",
-      description:
-        "Corso orientato alle certificazioni per il lavoro.",
-      buttonText: "Esplora",
+      description: "Corso orientato alle certificazioni per il lavoro.",
       status: "In corso",
+      students: [
+        { id: 3, firstName: "Luca", lastName: "Verdi" },
+      ],
     },
     {
       id: 3,
       level: "B2",
       title: "Tedesco livello intermedio",
-      description:
-        "Corso introduttivo alle struttre linguistiche del tedesco .",
-      buttonText: "Esplora",
+      description: "Corso di avvicinamento per l'università.",
       status: "Completato",
+      students: [],
+    },
+    {
+      id: 4,
+      level: "C2",
+      title: "Tedesco madrelingua",
+      description: "Corso per profili di alto livello.",
+      status: "Completato",
+      students: [],
     },
   ]);
 
@@ -48,6 +73,7 @@ export default function Dashboard() {
         } else {
           newStatus = "Da iniziare";
         }
+
         return {
           ...card,
           status: newStatus,
@@ -61,7 +87,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="p-6">
-        <h1 className="text-2xl pb-2">Corsi</h1>
+        <h1 className="pb-2 text-2xl">Corsi</h1>
 
         <button
           className="button-primary"
@@ -71,7 +97,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      <div className="pl-6 pb-12 flex flex-wrap gap-6">
+      <div className="flex flex-wrap gap-6 pl-6 pb-12">
         {cards.map((card) => (
           <CardCorso
             key={card.id}
@@ -79,8 +105,8 @@ export default function Dashboard() {
             level={card.level}
             title={card.title}
             description={card.description}
-            buttonText={card.buttonText}
             status={card.status}
+            students={card.students}
             onChangeStatus={changeStatus}
           />
         ))}
@@ -89,13 +115,12 @@ export default function Dashboard() {
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
-            
             <h2 className="mb-6 text-xl font-semibold text-gray-900">
               Nuovo corso
             </h2>
 
             <button
-              className="absolute right-4 top-4 text-2xl font-semibold text-gray-500 hover:text-gray-900 cursor-pointer"
+              className="absolute top-4 right-4 cursor-pointer text-2xl font-semibold text-gray-500 hover:text-gray-900"
               onClick={() => setIsFormOpen(false)}
             >
               ×
