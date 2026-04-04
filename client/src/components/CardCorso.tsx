@@ -13,18 +13,15 @@ type CardCorsoProps = {
   description: string;
   status: string;
   students: Student[];
-  onChangeStatus: (id: number) => void;
   onEdit: () => void;
 };
 
 export default function CardCorso({
-  id,
   level,
   title,
   description,
   status,
   students,
-  onChangeStatus,
   onEdit,
 }: CardCorsoProps) {
   const [showStudents, setShowStudents] = useState(false);
@@ -63,13 +60,6 @@ export default function CardCorso({
           onClick={() => setShowStudents((prev) => !prev)}
         >
           {showStudents ? "Chiudi" : "Esplora"}
-        </button>
-
-        <button
-          className="button-secondary"
-          onClick={() => onChangeStatus(id)}
-        >
-          Cambia stato
         </button>
 
         <button

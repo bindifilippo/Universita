@@ -19,6 +19,7 @@ type UpdateCourseData = {
   title: string;
   description: string;
   level: string;
+  status: string;
 };
 
 type EditCourseModalProps = {
@@ -29,6 +30,7 @@ type EditCourseModalProps = {
 };
 
 const levelOptions = ["A1", "A2", "B1", "B2", "C1", "C2", "IELTS", "GOETHE"];
+const statusOptions = ["Da iniziare", "In corso", "Completato"];
 
 export default function EditCourseModal({
   course,
@@ -39,6 +41,7 @@ export default function EditCourseModal({
   const [title, setTitle] = useState(course.title);
   const [description, setDescription] = useState(course.description);
   const [level, setLevel] = useState(course.level);
+  const [status, setStatus] = useState(course.status);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -52,6 +55,7 @@ export default function EditCourseModal({
       title: title.trim(),
       description: description.trim(),
       level,
+      status,
     });
   }
 
@@ -94,6 +98,18 @@ export default function EditCourseModal({
               className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
             >
               {levelOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+
+            <select
+              value={status}
+              onChange={(event) => setStatus(event.target.value)}
+              className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
+            >
+              {statusOptions.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>

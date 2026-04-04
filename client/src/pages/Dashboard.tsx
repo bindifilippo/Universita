@@ -28,6 +28,7 @@ type UpdateCourseData = {
   title: string;
   description: string;
   level: string;
+  status: string;
 };
 
 export default function Dashboard() {
@@ -72,31 +73,6 @@ export default function Dashboard() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
 
-  function changeStatus(id: number) {
-    setCards((prevCards) =>
-      prevCards.map((card) => {
-        if (card.id !== id) {
-          return card;
-        }
-
-        let newStatus = "";
-
-        if (card.status === "Da iniziare") {
-          newStatus = "In corso";
-        } else if (card.status === "In corso") {
-          newStatus = "Completato";
-        } else {
-          newStatus = "Da iniziare";
-        }
-
-        return {
-          ...card,
-          status: newStatus,
-        };
-      })
-    );
-  }
-
   function handleAddCourse(courseData: NewCourseData) {
     const newCourse: Course = {
       id: Date.now(),
@@ -119,6 +95,7 @@ export default function Dashboard() {
               title: updatedData.title,
               description: updatedData.description,
               level: updatedData.level,
+              status: updatedData.status,
             }
           : card
       )
@@ -155,7 +132,6 @@ export default function Dashboard() {
             description={card.description}
             status={card.status}
             students={card.students}
-            onChangeStatus={changeStatus}
             onEdit={() => setCourseToEdit(card)}
           />
         ))}
