@@ -35,7 +35,7 @@ stili globali
         border: 1px solid rgb(229 231 235);
     }
 
-    .button {
+    .button-primary {
         border-radius: 0.75rem;
         background-color: #111827;
         padding-left: 1rem;
@@ -48,8 +48,28 @@ stili globali
         color: #ffffff;
     }
 
-    .button:hover{
+    .button-primary:hover{
         background-color: #49556e;
+        cursor: pointer;
+    }
+
+    .button-secondary {
+      border-radius: 0.75rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      border: 1px solid #111827;
+    }
+
+    .button-secondary:hover{
+        background-color: rgb(54, 65, 83, 0.2);
+        background-color: #36415333;
+        color: #111827;
+        cursor: pointer;
     }
  }
  

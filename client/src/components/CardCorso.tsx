@@ -31,7 +31,7 @@ export default function CardCorso({
   return (
     <div className={`w-full max-w-sm rounded-2xl p-6 ${cardStyle}`}>
       <div className="mb-4">
-        <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
+        <span className="inline-block rounded-full bg-gray-100  px-3 py-1 text-l font-medium text-gray-600">
           {level}
         </span>
       </div>
@@ -45,7 +45,7 @@ export default function CardCorso({
       </p>
 
       <div className="flex items-center justify-between">
-        <button className="button" onClick={() => onChangeStatus(id)}>
+        <button className="button-primary" onClick={() => onChangeStatus(id)}>
           {buttonText}
         </button>
 

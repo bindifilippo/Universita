@@ -8,7 +8,7 @@ export default function Header({ onToggleMenu }: HeaderProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button
-            className="rounded-lg bg-gray-900 px-4 py-2 text-white"
+            className="button-primary"
             onClick={onToggleMenu}
           >
             Menu
@@ -20,7 +20,7 @@ export default function Header({ onToggleMenu }: HeaderProps) {
         </div>
 
         <div className="flex items-center gap-6">
-          <button className="button">Esci</button>
+          <button className="button-secondary">Esci</button>
         </div>
       </div>
     </header>

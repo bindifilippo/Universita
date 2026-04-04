@@ -5,29 +5,29 @@ export default function Dashboard() {
   const [cards, setCards] = useState([
     {
       id: 1,
-      level: "Livello B1",
+      level: "A1",
       title: "Tedesco per principianti",
       description:
-        "Questo è un testo descrittivo molto semplice. Serve a spiegare il contenuto principale della card con una UI pulita e minimale.",
-      buttonText: "Entra",
+        "Corso base di grammatica e vocaboli",
+      buttonText: "Esplora",
       status: "Da iniziare",
     },
     {
       id: 2,
-      level: "Livello C1",
-      title: "Tedesco per esperti",
+      level: "C1",
+      title: "Tedesco avanzato",
       description:
-        "Questo è un testo descrittivo molto semplice. Serve a spiegare il contenuto principale della card con una UI pulita e minimale.",
-      buttonText: "Entra",
+        "Corso orientato alle certificazioni per il lavoro.",
+      buttonText: "Esplora",
       status: "In corso",
     },
     {
       id: 3,
-      level: "Livello B2",
+      level: "B2",
       title: "Tedesco livello intermedio",
       description:
-        "Questo è un testo descrittivo molto semplice. Serve a spiegare il contenuto principale della card con una UI pulita e minimale.",
-      buttonText: "Entra",
+        "Corso introduttivo alle struttre linguistiche del tedesco .",
+      buttonText: "Esplora",
       status: "Completato",
     },
   ]);
@@ -64,7 +64,7 @@ export default function Dashboard() {
         <h1 className="text-2xl pb-2">Corsi</h1>
 
         <button
-          className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 transition"
+          className="button-primary"
           onClick={() => setIsFormOpen(true)}
         >
           Aggiungi corso
@@ -89,16 +89,17 @@ export default function Dashboard() {
       {isFormOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
+            
+            <h2 className="mb-6 text-xl font-semibold text-gray-900">
+              Nuovo corso
+            </h2>
+
             <button
-              className="absolute right-4 top-4 text-xl font-semibold text-gray-500 hover:text-gray-900"
+              className="absolute right-4 top-4 text-2xl font-semibold text-gray-500 hover:text-gray-900 cursor-pointer"
               onClick={() => setIsFormOpen(false)}
             >
               ×
             </button>
-
-            <h2 className="mb-6 text-xl font-semibold text-gray-900">
-              Nuovo corso
-            </h2>
 
             <form className="flex flex-col gap-4">
               <input
@@ -121,7 +122,7 @@ export default function Dashboard() {
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
-                  className="rounded-xl border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 transition"
+                  className="button-secondary"
                   onClick={() => setIsFormOpen(false)}
                 >
                   Annulla
@@ -129,7 +130,7 @@ export default function Dashboard() {
 
                 <button
                   type="submit"
-                  className="rounded-xl bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 transition"
+                  className="button-primary"
                 >
                   Salva
                 </button>
