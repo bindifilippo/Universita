@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type Student = {
   id: number;
   firstName: string;
@@ -7,13 +5,13 @@ type Student = {
 };
 
 type CardCorsoProps = {
-  id: number;
   level: string;
   title: string;
   description: string;
   status: string;
   students: Student[];
   onEdit: () => void;
+  onExplore: () => void;
 };
 
 export default function CardCorso({
@@ -23,9 +21,8 @@ export default function CardCorso({
   status,
   students,
   onEdit,
+  onExplore,
 }: CardCorsoProps) {
-  const [showStudents, setShowStudents] = useState(false);
-
   let statusStyle = "bg-gray-100 text-gray-700";
 
   if (status === "In corso") {
@@ -55,51 +52,20 @@ export default function CardCorso({
       </p>
 
       <div className="mb-4 flex flex-wrap gap-3">
-        <button
-          className="button-primary"
-          onClick={() => setShowStudents((prev) => !prev)}
-        >
-          {showStudents ? "Chiudi" : "Esplora"}
+        <button className="button-primary" onClick={onExplore}>
+          Esplora
         </button>
 
-        <button
-          className="button-secondary"
-          onClick={onEdit}
-        >
+        <button className="button-secondary" onClick={onEdit}>
           Modifica
         </button>
       </div>
 
-      <div className="mb-4">
+      <div>
         <span className={`rounded-full px-3 py-2 text-xs font-medium ${statusStyle}`}>
           {status}
         </span>
       </div>
-
-      {showStudents && (
-        <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
-          <h3 className="mb-3 text-sm font-semibold text-gray-800">
-            Elenco studenti
-          </h3>
-
-          {students.length === 0 ? (
-            <p className="text-sm text-gray-500">Nessuno studente iscritto</p>
-          ) : (
-            <div className="max-h-48 overflow-y-auto pr-2">
-              <ul className="space-y-2">
-                {students.map((student) => (
-                  <li
-                    key={student.id}
-                    className="rounded-lg bg-white px-3 py-2 text-sm text-gray-700 shadow-sm"
-                  >
-                    {student.firstName} {student.lastName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 }

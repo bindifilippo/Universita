@@ -2,6 +2,7 @@ import { useState } from "react";
 import CardCorso from "../components/CardCorso";
 import FormCorso from "../components/FormCorso";
 import EditCourseModal from "../components/EditCourseModal";
+import CourseDetailsModal from "../components/CourseDetailsModal";
 
 type Student = {
   id: number;
@@ -72,6 +73,7 @@ export default function Dashboard() {
 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
   function handleAddCourse(courseData: NewCourseData) {
     const newCourse: Course = {
@@ -102,11 +104,27 @@ export default function Dashboard() {
     );
 
     setCourseToEdit(null);
+
+    setSelectedCourse((prevSelected) =>
+      prevSelected && prevSelected.id === id
+        ? {
+            ...prevSelected,
+            title: updatedData.title,
+            description: updatedData.description,
+            level: updatedData.level,
+            status: updatedData.status,
+          }
+        : prevSelected
+    );
   }
 
   function handleDeleteCourse(id: number) {
     setCards((prevCards) => prevCards.filter((card) => card.id !== id));
     setCourseToEdit(null);
+
+    if (selectedCourse?.id === id) {
+      setSelectedCourse(null);
+    }
   }
 
   return (
@@ -126,12 +144,12 @@ export default function Dashboard() {
         {cards.map((card) => (
           <CardCorso
             key={card.id}
-            id={card.id}
             level={card.level}
             title={card.title}
             description={card.description}
             status={card.status}
             students={card.students}
+            onExplore={() => setSelectedCourse(card)}
             onEdit={() => setCourseToEdit(card)}
           />
         ))}
@@ -150,6 +168,13 @@ export default function Dashboard() {
           onClose={() => setCourseToEdit(null)}
           onSave={handleUpdateCourse}
           onDelete={handleDeleteCourse}
+        />
+      )}
+
+      {selectedCourse && (
+        <CourseDetailsModal
+          course={selectedCourse}
+          onClose={() => setSelectedCourse(null)}
         />
       )}
     </>
