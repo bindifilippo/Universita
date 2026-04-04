@@ -14,6 +14,7 @@ type CardCorsoProps = {
   status: string;
   students: Student[];
   onChangeStatus: (id: number) => void;
+  onEdit: () => void;
 };
 
 export default function CardCorso({
@@ -24,6 +25,7 @@ export default function CardCorso({
   status,
   students,
   onChangeStatus,
+  onEdit,
 }: CardCorsoProps) {
   const [showStudents, setShowStudents] = useState(false);
 
@@ -38,7 +40,7 @@ export default function CardCorso({
   return (
     <div className="w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-6 shadow-md">
       <div className="mb-4">
-        <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-l font-medium text-gray-600">
+        <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">
           {level}
         </span>
       </div>
@@ -55,12 +57,12 @@ export default function CardCorso({
         Studenti iscritti: {students.length}
       </p>
 
-      <div className="mb-4 flex gap-3">
+      <div className="mb-4 flex flex-wrap gap-3">
         <button
           className="button-primary"
           onClick={() => setShowStudents((prev) => !prev)}
         >
-          {showStudents ? "Nascondi" : "Esplora"}
+          {showStudents ? "Chiudi" : "Esplora"}
         </button>
 
         <button
@@ -68,6 +70,13 @@ export default function CardCorso({
           onClick={() => onChangeStatus(id)}
         >
           Cambia stato
+        </button>
+
+        <button
+          className="button-secondary"
+          onClick={onEdit}
+        >
+          Modifica
         </button>
       </div>
 
@@ -78,21 +87,26 @@ export default function CardCorso({
       </div>
 
       {showStudents && (
-        <div className="rounded-xl bg-gray-50 p-4">
-          <h3 className="mb-2 text-sm font-semibold text-gray-800">
+        <div className="mt-4 rounded-xl border border-gray-200 bg-gray-50 p-4">
+          <h3 className="mb-3 text-sm font-semibold text-gray-800">
             Elenco studenti
           </h3>
 
           {students.length === 0 ? (
             <p className="text-sm text-gray-500">Nessuno studente iscritto</p>
           ) : (
-            <ul className="space-y-2">
-              {students.map((student) => (
-                <li key={student.id} className="text-sm text-gray-700">
-                  {student.firstName} {student.lastName}
-                </li>
-              ))}
-            </ul>
+            <div className="max-h-48 overflow-y-auto pr-2">
+              <ul className="space-y-2">
+                {students.map((student) => (
+                  <li
+                    key={student.id}
+                    className="rounded-lg bg-white px-3 py-2 text-sm text-gray-700 shadow-sm"
+                  >
+                    {student.firstName} {student.lastName}
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       )}

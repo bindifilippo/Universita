@@ -1,5 +1,7 @@
 import { useState } from "react";
 import CardCorso from "../components/CardCorso";
+import FormCorso from "../components/FormCorso";
+import EditCourseModal from "../components/EditCourseModal";
 
 type Student = {
   id: number;
@@ -14,6 +16,18 @@ type Course = {
   description: string;
   status: string;
   students: Student[];
+};
+
+type NewCourseData = {
+  title: string;
+  description: string;
+  level: string;
+};
+
+type UpdateCourseData = {
+  title: string;
+  description: string;
+  level: string;
 };
 
 export default function Dashboard() {
@@ -35,9 +49,7 @@ export default function Dashboard() {
       title: "Tedesco avanzato",
       description: "Corso orientato alle certificazioni per il lavoro.",
       status: "In corso",
-      students: [
-        { id: 3, firstName: "Luca", lastName: "Verdi" },
-      ],
+      students: [{ id: 3, firstName: "Luca", lastName: "Verdi" }],
     },
     {
       id: 3,
@@ -56,6 +68,9 @@ export default function Dashboard() {
       students: [],
     },
   ]);
+
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
 
   function changeStatus(id: number) {
     setCards((prevCards) =>
@@ -82,7 +97,40 @@ export default function Dashboard() {
     );
   }
 
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  function handleAddCourse(courseData: NewCourseData) {
+    const newCourse: Course = {
+      id: Date.now(),
+      title: courseData.title,
+      description: courseData.description,
+      level: courseData.level,
+      status: "Da iniziare",
+      students: [],
+    };
+
+    setCards((prevCards) => [...prevCards, newCourse]);
+  }
+
+  function handleUpdateCourse(id: number, updatedData: UpdateCourseData) {
+    setCards((prevCards) =>
+      prevCards.map((card) =>
+        card.id === id
+          ? {
+              ...card,
+              title: updatedData.title,
+              description: updatedData.description,
+              level: updatedData.level,
+            }
+          : card
+      )
+    );
+
+    setCourseToEdit(null);
+  }
+
+  function handleDeleteCourse(id: number) {
+    setCards((prevCards) => prevCards.filter((card) => card.id !== id));
+    setCourseToEdit(null);
+  }
 
   return (
     <>
@@ -108,61 +156,25 @@ export default function Dashboard() {
             status={card.status}
             students={card.students}
             onChangeStatus={changeStatus}
+            onEdit={() => setCourseToEdit(card)}
           />
         ))}
       </div>
 
       {isFormOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl">
-            <h2 className="mb-6 text-xl font-semibold text-gray-900">
-              Nuovo corso
-            </h2>
+        <FormCorso
+          onClose={() => setIsFormOpen(false)}
+          onSave={handleAddCourse}
+        />
+      )}
 
-            <button
-              className="absolute top-4 right-4 cursor-pointer text-2xl font-semibold text-gray-500 hover:text-gray-900"
-              onClick={() => setIsFormOpen(false)}
-            >
-              ×
-            </button>
-
-            <form className="flex flex-col gap-4">
-              <input
-                type="text"
-                placeholder="Titolo corso"
-                className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
-              />
-
-              <textarea
-                placeholder="Descrizione"
-                className="min-h-30 rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
-              />
-
-              <input
-                type="text"
-                placeholder="Livello"
-                className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
-              />
-
-              <div className="flex justify-end gap-3 pt-2">
-                <button
-                  type="button"
-                  className="button-secondary"
-                  onClick={() => setIsFormOpen(false)}
-                >
-                  Annulla
-                </button>
-
-                <button
-                  type="submit"
-                  className="button-primary"
-                >
-                  Salva
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {courseToEdit && (
+        <EditCourseModal
+          course={courseToEdit}
+          onClose={() => setCourseToEdit(null)}
+          onSave={handleUpdateCourse}
+          onDelete={handleDeleteCourse}
+        />
       )}
     </>
   );
