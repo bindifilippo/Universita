@@ -1,11 +1,13 @@
-//import { useState } from 'react'
 import './App.css'
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/Corsi'
+import Layout from './components/Layout'
 
 function App() {
   return (
     <>
-      <Dashboard/>
+    <Layout>
+      <Dashboard />
+    </Layout>
     </> 
    
   )
