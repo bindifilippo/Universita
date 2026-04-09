@@ -1,6 +1,6 @@
 # University
 
-## Short intro
+## Intro
 
 **Universita** is a full-stack web application designed as a school management utility tool.  
 It combines a modern frontend interface with a Java backend to model and manage core academic entities such as courses, teachers, and students.
