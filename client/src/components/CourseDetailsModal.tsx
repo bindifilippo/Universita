@@ -1,14 +1,13 @@
 import type { CourseDetailsModalProps } from "../types";
 
 export default function CourseDetailsModal({course, onClose,}: CourseDetailsModalProps) {
-  let statusStyle = "bg-gray-100 text-gray-700";
+  let statusClass = "badge-status--default";
 
   if (course.status === "In corso") {
-    statusStyle = "bg-yellow-100 text-yellow-800";
+    statusClass = "badge-status--in-progress";
   } else if (course.status === "Completato") {
-    statusStyle = "bg-green-100 text-green-800";
+    statusClass = "badge-status--completed";
   }
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
       <div className="relative w-full max-w-2xl rounded-2xl bg-white p-6 shadow-xl">
@@ -26,11 +25,8 @@ export default function CourseDetailsModal({course, onClose,}: CourseDetailsModa
         </div>
 
         <div className="mb-4 flex flex-wrap gap-3">
-          <span className="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700">
-            {course.level}
-          </span>
-
-          <span className={`rounded-full px-3 py-1 text-sm font-medium ${statusStyle}`}>
+          <span className="badge badge-level">{course.level}</span>
+          <span className={`badge badge-status ${statusClass}`}>
             {course.status}
           </span>
         </div>

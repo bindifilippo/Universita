@@ -1,26 +1,24 @@
-import type { CardCorsoProps } from "../types";
+import type { CardCorsoProps, CourseStatus } from "../types";
 
-// Componente presentazionale che riceve un corso completo
-// e comunica con il parent tramite callback.
+// Mappa centralizzata tra stato del corso e variante CSS del badge.
+// Evita if/else ripetuti e rende il componente più leggibile.
+const statusClassMap: Record<CourseStatus, string> = {
+  "Da iniziare": "badge-status--default",
+  "In corso": "badge-status--in-progress",
+  "Completato": "badge-status--completed",
+};
+
 export default function CardCorso({
   course,
   onEdit,
   onExplore,
 }: CardCorsoProps) {
-  let statusStyle = "bg-gray-100 text-gray-700";
-
-  if (course.status === "In corso") {
-    statusStyle = "bg-yellow-100 text-yellow-800";
-  } else if (course.status === "Completato") {
-    statusStyle = "bg-green-100 text-green-800";
-  }
+  const statusClass = statusClassMap[course.status];
 
   return (
     <div className="cardCorso">
       <div className="mb-4">
-        <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600">
-          {course.level}
-        </span>
+        <span className="badge badge-level">{course.level}</span>
       </div>
 
       <h2 className="mb-2 text-xl font-semibold text-gray-900">
@@ -36,17 +34,17 @@ export default function CardCorso({
       </p>
 
       <div className="mb-4 flex flex-wrap gap-3">
-        <button className="button-primary" onClick={onExplore}>
+        <button type="button" className="button-primary" onClick={onExplore}>
           Esplora
         </button>
 
-        <button className="button-secondary" onClick={onEdit}>
+        <button type="button" className="button-secondary" onClick={onEdit}>
           Modifica
         </button>
       </div>
 
       <div>
-        <span className={`rounded-full px-3 py-2 text-xs font-medium ${statusStyle}`}>
+        <span className={`badge badge-status ${statusClass}`}>
           {course.status}
         </span>
       </div>
