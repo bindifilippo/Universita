@@ -1,22 +1,4 @@
-type Student = {
-  id: number;
-  firstName: string;
-  lastName: string;
-};
-
-type Course = {
-  id: number;
-  level: string;
-  title: string;
-  description: string;
-  status: string;
-  students: Student[];
-};
-
-type CourseDetailsModalProps = {
-  course: Course;
-  onClose: () => void;
-};
+import type { CourseDetailsModalProps } from "../types";
 
 export default function CourseDetailsModal({course, onClose,}: CourseDetailsModalProps) {
   let statusStyle = "bg-gray-100 text-gray-700";

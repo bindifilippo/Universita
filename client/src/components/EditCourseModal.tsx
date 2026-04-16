@@ -1,36 +1,8 @@
 import { useState } from "react";
-
-type Student = {
-  id: number;
-  firstName: string;
-  lastName: string;
-};
-
-type Course = {
-  id: number;
-  level: string;
-  title: string;
-  description: string;
-  status: string;
-  students: Student[];
-};
-
-type UpdateCourseData = {
-  title: string;
-  description: string;
-  level: string;
-  status: string;
-};
-
-type EditCourseModalProps = {
-  course: Course;
-  onClose: () => void;
-  onSave: (id: number, data: UpdateCourseData) => void;
-  onDelete: (id: number) => void;
-};
+import type { CourseStatus, EditCourseModalProps } from "../types";
 
 const levelOptions = ["A1", "A2", "B1", "B2", "C1", "C2", "IELTS", "GOETHE"];
-const statusOptions = ["Da iniziare", "In corso", "Completato"];
+const statusOptions: CourseStatus[] = ["Da iniziare", "In corso", "Completato"];
 
 export default function EditCourseModal({
   course,
@@ -41,7 +13,7 @@ export default function EditCourseModal({
   const [title, setTitle] = useState(course.title);
   const [description, setDescription] = useState(course.description);
   const [level, setLevel] = useState(course.level);
-  const [status, setStatus] = useState(course.status);
+  const [status, setStatus] = useState<CourseStatus>(course.status);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -106,7 +78,7 @@ export default function EditCourseModal({
 
             <select
               value={status}
-              onChange={(event) => setStatus(event.target.value)}
+              onChange={(event) => setStatus(event.target.value as CourseStatus)}
               className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
             >
               {statusOptions.map((option) => (

@@ -1,37 +1,12 @@
+// una volta collegato backend e database fare refactor
+import type { Course, NewCourseData, UpdateCourseData } from "../types";
+
 import { useState } from "react";
 import CardCorso from "../components/CardCorso";
 import FormCorso from "../components/FormCorso";
 import EditCourseModal from "../components/EditCourseModal";
 import CourseDetailsModal from "../components/CourseDetailsModal";
 
-//definizione dei tipi
-type Course = {
-  id: number;
-  level: string;
-  title: string;
-  description: string;
-  status: string;
-  students: Student[];
-};
-
-type Student = {
-  id: number;
-  firstName: string;
-  lastName: string;
-};
-
-type NewCourseData = {
-  title: string;
-  description: string;
-  level: string;
-};
-
-type UpdateCourseData = {
-  title: string;
-  description: string;
-  level: string;
-  status: string;
-};
 
 export default function Dashboard() {
   //stato principale con inizializzazione corsi fittizi. Dati non arrivano da API
@@ -79,18 +54,28 @@ export default function Dashboard() {
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
   //funzione per aggiungere corso
-  function handleAddCourse(courseData: NewCourseData) {
-    const newCourse: Course = {
-      id: Date.now(),
-      title: courseData.title,
-      description: courseData.description,
-      level: courseData.level,
-      status: "Da iniziare",
-      students: [],
-    };
-    //aggiornamento stato
-    setCards((prevCards) => [...prevCards, newCourse]);
-  }
+  async function handleAddCourse(courseData: NewCourseData) {
+    try {
+        const response = await fetch("/api/courses", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(courseData),
+        });
+
+        if (!response.ok) {
+          throw new Error("Errore nella creazione del corso");
+        }
+
+        const createdCourse: Course = await response.json();
+
+        setCards((prevCards) => [...prevCards, createdCourse]);
+        setIsFormOpen(false);
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
   //funzione per aggiornare corso
   function handleUpdateCourse(id: number, updatedData: UpdateCourseData) {
@@ -149,11 +134,7 @@ export default function Dashboard() {
         {cards.map((card) => (
           <CardCorso
             key={card.id}
-            level={card.level}
-            title={card.title}
-            description={card.description}
-            status={card.status}
-            students={card.students}
+            course={card}
             onExplore={() => setSelectedCourse(card)}
             onEdit={() => setCourseToEdit(card)}
           />
