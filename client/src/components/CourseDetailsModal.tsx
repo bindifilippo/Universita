@@ -18,10 +18,7 @@ type CourseDetailsModalProps = {
   onClose: () => void;
 };
 
-export default function CourseDetailsModal({
-  course,
-  onClose,
-}: CourseDetailsModalProps) {
+export default function CourseDetailsModal({course, onClose,}: CourseDetailsModalProps) {
   let statusStyle = "bg-gray-100 text-gray-700";
 
   if (course.status === "In corso") {
@@ -84,7 +81,7 @@ export default function CourseDetailsModal({
                 {course.students.map((student) => (
                   <li
                     key={student.id}
-                    className="rounded-lg bg-white px-3 py-2 text-sm text-gray-70 border border-gray-200"
+                    className="rounded-lg bg-white px-3 py-2 text-sm text-gray-700 border border-gray-200"
                   >
                     {student.firstName} {student.lastName}
                   </li>

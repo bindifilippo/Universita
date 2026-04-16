@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 
 import Header from "./Header";
-import Sidebar from "../pages/Sidebar";
+import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 
 type LayoutProps = {
@@ -10,6 +10,7 @@ type LayoutProps = {
 };
 
 export default function Layout({ children }: LayoutProps) {
+  //controlla stato visibilità sidebar
   const [isOpen, setIsOpen] = useState(false);
 
   function handleToggleMenu() {

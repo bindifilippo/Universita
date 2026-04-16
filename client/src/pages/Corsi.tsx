@@ -4,12 +4,7 @@ import FormCorso from "../components/FormCorso";
 import EditCourseModal from "../components/EditCourseModal";
 import CourseDetailsModal from "../components/CourseDetailsModal";
 
-type Student = {
-  id: number;
-  firstName: string;
-  lastName: string;
-};
-
+//definizione dei tipi
 type Course = {
   id: number;
   level: string;
@@ -17,6 +12,12 @@ type Course = {
   description: string;
   status: string;
   students: Student[];
+};
+
+type Student = {
+  id: number;
+  firstName: string;
+  lastName: string;
 };
 
 type NewCourseData = {
@@ -33,6 +34,7 @@ type UpdateCourseData = {
 };
 
 export default function Dashboard() {
+  //stato principale con inizializzazione corsi fittizi. Dati non arrivano da API
   const [cards, setCards] = useState<Course[]>([
     {
       id: 1,
@@ -71,10 +73,12 @@ export default function Dashboard() {
     },
   ]);
 
+  //controllo apertura form, modal di modifica e di dettaglio
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [courseToEdit, setCourseToEdit] = useState<Course | null>(null);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
 
+  //funzione per aggiungere corso
   function handleAddCourse(courseData: NewCourseData) {
     const newCourse: Course = {
       id: Date.now(),
@@ -84,10 +88,11 @@ export default function Dashboard() {
       status: "Da iniziare",
       students: [],
     };
-
+    //aggiornamento stato
     setCards((prevCards) => [...prevCards, newCourse]);
   }
 
+  //funzione per aggiornare corso
   function handleUpdateCourse(id: number, updatedData: UpdateCourseData) {
     setCards((prevCards) =>
       prevCards.map((card) =>

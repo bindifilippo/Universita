@@ -1,12 +1,11 @@
-import './App.css'
-import Dashboard from './pages/Corsi'
 import Layout from './components/Layout'
+import Corsi from './pages/Corsi'
 
 function App() {
   return (
     <>
     <Layout>
-      <Dashboard />
+      <Corsi />
     </Layout>
     </> 
    

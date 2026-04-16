@@ -24,6 +24,7 @@ stili globali
   }
 }
 
+/*definire classi riusabili custom*/
 @layer components { 
     .cardCorso {
         max-width: 24rem;
@@ -67,7 +68,6 @@ stili globali
 
     .button-secondary:hover{
         background-color: rgb(54, 65, 83, 0.2);
-        background-color: #36415333;
         color: #111827;
         cursor: pointer;
     }

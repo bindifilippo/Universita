@@ -14,6 +14,7 @@ type CardCorsoProps = {
   onExplore: () => void;
 };
 
+//riceve props, componente presentazionale che comunica con il parent tramite eventi
 export default function CardCorso({
   level,
   title,
