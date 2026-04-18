@@ -10,24 +10,25 @@ export default function EditCourseModal({
   onSave,
   onDelete,
 }: EditCourseModalProps) {
-  const [title, setTitle] = useState(course.title);
-  const [description, setDescription] = useState(course.description);
-  const [level, setLevel] = useState(course.level);
-  const [status, setStatus] = useState<CourseStatus>(course.status);
+  const [titolo, setTitolo] = useState(course.titolo);
+  const [descrizione, setDescrizione] = useState(course.descrizione ?? "");
+  const [livello, setLivello] = useState(course.livello);
+  const [stato, setStato] = useState<CourseStatus>(course.stato);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!title.trim() || !description.trim()) {
+    if (!titolo.trim()) {
       return;
     }
 
     onSave(course.id, {
-      title: title.trim(),
-      description: description.trim(),
-      level,
-      status,
+      titolo: titolo.trim(),
+      descrizione: descrizione.trim() || undefined,
+      livello,
+      stato,
+      annoCreazione: course.annoCreazione,
     });
   }
 
@@ -42,6 +43,8 @@ export default function EditCourseModal({
           <button
             className="absolute top-4 right-4 cursor-pointer text-2xl font-semibold text-gray-500 hover:text-gray-900"
             onClick={onClose}
+            type="button"
+            aria-label="Chiudi finestra"
           >
             ×
           </button>
@@ -49,24 +52,23 @@ export default function EditCourseModal({
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <input
               type="text"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              value={titolo}
+              onChange={(event) => setTitolo(event.target.value)}
               className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
               placeholder="Titolo corso"
               required
             />
 
             <textarea
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
+              value={descrizione}
+              onChange={(event) => setDescrizione(event.target.value)}
               className="min-h-30 rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
               placeholder="Descrizione"
-              required
             />
 
             <select
-              value={level}
-              onChange={(event) => setLevel(event.target.value)}
+              value={livello}
+              onChange={(event) => setLivello(event.target.value)}
               className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
             >
               {levelOptions.map((option) => (
@@ -77,8 +79,8 @@ export default function EditCourseModal({
             </select>
 
             <select
-              value={status}
-              onChange={(event) => setStatus(event.target.value as CourseStatus)}
+              value={stato}
+              onChange={(event) => setStato(event.target.value as CourseStatus)}
               className="rounded-lg border border-gray-300 px-4 py-2 outline-none focus:border-gray-500"
             >
               {statusOptions.map((option) => (
@@ -106,10 +108,7 @@ export default function EditCourseModal({
                   Annulla
                 </button>
 
-                <button
-                  type="submit"
-                  className="button-primary"
-                >
+                <button type="submit" className="button-primary">
                   Salva modifiche
                 </button>
               </div>

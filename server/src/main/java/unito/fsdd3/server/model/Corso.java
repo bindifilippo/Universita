@@ -1,5 +1,3 @@
-//file che rappresenta il dato principale dell'applicazione, rappresentato come classe java con tre proprietà.
-//Grazie a JPA la classe viene collegata anche a una tabella del database.
 package unito.fsdd3.server.model;
 
 import jakarta.persistence.Entity;
@@ -7,22 +5,28 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity // tabella database
+@Entity
 public class Corso {
 
-    @Id // identificazione univoca
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // generazione automatica dal database.
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String titolo;
     private Integer annoCreazione;
+    private String livello;
+    private String stato;
+    private String descrizione;
 
-    //buona pratica costruttore vuoto per JPA
     public Corso() {
     }
 
-    public Corso(String titolo, Integer annoCreazione){
+    public Corso(String titolo, Integer annoCreazione, String livello, String stato, String descrizione) {
         this.titolo = titolo;
         this.annoCreazione = annoCreazione;
+        this.livello = livello;
+        this.stato = stato;
+        this.descrizione = descrizione;
     }
 
     public Integer getId() {
@@ -43,5 +47,29 @@ public class Corso {
 
     public void setAnnoCreazione(Integer annoCreazione) {
         this.annoCreazione = annoCreazione;
+    }
+
+    public String getLivello() {
+        return livello;
+    }
+
+    public void setLivello(String livello) {
+        this.livello = livello;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 }

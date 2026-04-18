@@ -23,20 +23,27 @@ public class CorsoController {
 
     @PostMapping
     public ResponseEntity<CorsoResponse> creaCorso(@Valid @RequestBody CorsoRequest request) {
-        //il controller sta facendo mapping, valutare cartella mapping o spostare nel service
-        Corso corso = new Corso(request.getTitolo(), request.getAnnoCreazione());
+        Corso corso = new Corso(
+                request.getTitolo(),
+                request.getAnnoCreazione(),
+                request.getLivello(),
+                request.getStato(),
+                request.getDescrizione());
 
         Corso salvato = corsoService.creaCorso(corso);
 
         CorsoResponse response = new CorsoResponse(
                 salvato.getId(),
                 salvato.getTitolo(),
-                salvato.getAnnoCreazione());
+                salvato.getAnnoCreazione(),
+                salvato.getLivello(),
+                salvato.getStato(),
+                salvato.getDescrizione());
 
         return ResponseEntity.ok(response);
     }
 
-   @GetMapping
+    @GetMapping
     public ResponseEntity<List<CorsoResponse>> getTuttiICorsi() {
         List<Corso> corsi = corsoService.trovaTuttiICorsi();
 
@@ -44,7 +51,10 @@ public class CorsoController {
                 .map(corso -> new CorsoResponse(
                         corso.getId(),
                         corso.getTitolo(),
-                        corso.getAnnoCreazione()))
+                        corso.getAnnoCreazione(),
+                        corso.getLivello(),
+                        corso.getStato(),
+                        corso.getDescrizione()))
                 .toList();
 
         return ResponseEntity.ok(response);
@@ -61,16 +71,25 @@ public class CorsoController {
         CorsoResponse response = new CorsoResponse(
                 corso.getId(),
                 corso.getTitolo(),
-                corso.getAnnoCreazione());
+                corso.getAnnoCreazione(),
+                corso.getLivello(),
+                corso.getStato(),
+                corso.getDescrizione());
 
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<CorsoResponse> aggiornaCorso(@PathVariable Integer id,
+    @PutMapping("/{id}")
+    public ResponseEntity<CorsoResponse> aggiornaCorso(
+            @PathVariable Integer id,
             @Valid @RequestBody CorsoRequest request) {
 
-        Corso corsoAggiornato = new Corso(request.getTitolo(), request.getAnnoCreazione());
+        Corso corsoAggiornato = new Corso(
+                request.getTitolo(),
+                request.getAnnoCreazione(),
+                request.getLivello(),
+                request.getStato(),
+                request.getDescrizione());
 
         Corso corso = corsoService.aggiornaCorso(id, corsoAggiornato);
 
@@ -81,12 +100,15 @@ public class CorsoController {
         CorsoResponse response = new CorsoResponse(
                 corso.getId(),
                 corso.getTitolo(),
-                corso.getAnnoCreazione());
+                corso.getAnnoCreazione(),
+                corso.getLivello(),
+                corso.getStato(),
+                corso.getDescrizione());
 
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminaCorso(@PathVariable Integer id) {
         corsoService.eliminaCorso(id);
         return ResponseEntity.noContent().build();

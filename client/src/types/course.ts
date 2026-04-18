@@ -4,22 +4,26 @@ export type CourseStatus = "Da iniziare" | "In corso" | "Completato";
 
 export type Course = {
   id: number;
-  level: string;
-  title: string;
-  description: string;
-  status: CourseStatus;
-  students: Student[];
+  titolo: string;
+  annoCreazione: number;
+  livello: string;
+  stato: CourseStatus;
+  descrizione?: string;
+  studenti?: Student[];
 };
 
 export type NewCourseData = {
-  title: string;
-  description: string;
-  level: string;
+  titolo: string;
+  annoCreazione: number;
+  livello: string;
+  stato: CourseStatus;
+  descrizione?: string;
 };
 
 export type UpdateCourseData = {
-  title: string;
-  description: string;
-  level: string;
-  status: CourseStatus;
+  titolo: string;
+  annoCreazione: number;
+  livello: string;
+  stato: CourseStatus;
+  descrizione?: string;
 };

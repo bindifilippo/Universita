@@ -11,6 +11,14 @@ public class CorsoRequest {
     @NotNull
     private Integer annoCreazione;
 
+    @NotBlank
+    private String livello;
+
+    @NotBlank
+    private String stato;
+
+    private String descrizione;
+
     public String getTitolo() {
         return titolo;
     }
@@ -25,5 +33,29 @@ public class CorsoRequest {
 
     public void setAnnoCreazione(Integer annoCreazione) {
         this.annoCreazione = annoCreazione;
+    }
+
+    public String getLivello() {
+        return livello;
+    }
+
+    public void setLivello(String livello) {
+        this.livello = livello;
+    }
+
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
+    }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
     }
 }

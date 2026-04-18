@@ -35,7 +35,7 @@ public class CorsoService {
     }
 
     public Corso aggiornaCorso(Integer id, Corso corsoAggiornato) {
-        Corso corsoEsistente = trovaCorsoPerId(id);
+    Corso corsoEsistente = trovaCorsoPerId(id);
 
         if (corsoEsistente == null) {
             return null;
@@ -43,6 +43,9 @@ public class CorsoService {
 
         corsoEsistente.setTitolo(corsoAggiornato.getTitolo());
         corsoEsistente.setAnnoCreazione(corsoAggiornato.getAnnoCreazione());
+        corsoEsistente.setLivello(corsoAggiornato.getLivello());
+        corsoEsistente.setStato(corsoAggiornato.getStato());
+        corsoEsistente.setDescrizione(corsoAggiornato.getDescrizione());
 
         return corsoRepository.save(corsoEsistente);
     }
