@@ -36,7 +36,6 @@ export async function getCourses(): Promise<Course[]> {
   const response = await fetch(API_BASE_URL, {
     method: "GET",
   });
-
   return handleJsonResponse<Course[]>(response);
 }
 

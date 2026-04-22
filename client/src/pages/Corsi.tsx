@@ -27,7 +27,6 @@ export default function Dashboard() {
       try {
         setIsLoading(true);
         setError(null);
-
         const data = await getCourses();
         setCards(data);
       } catch (err) {
@@ -37,16 +36,13 @@ export default function Dashboard() {
         setIsLoading(false);
       }
     }
-
     loadCourses();
   }, []);
 
   async function handleAddCourse(courseData: NewCourseData) {
     try {
       setError(null);
-
       const createdCourse = await createCourse(courseData);
-
       setCards((prevCards) => [...prevCards, createdCourse]);
       setIsFormOpen(false);
     } catch (err) {
