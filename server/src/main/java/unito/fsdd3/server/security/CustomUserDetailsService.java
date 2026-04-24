@@ -12,6 +12,7 @@ import unito.fsdd3.server.repository.UserRepository;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
+    //accesso al database postgresSQL
     private final UserRepository userRepository;
 
     public CustomUserDetailsService(UserRepository userRepository) {
@@ -19,6 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
+    //carica l'utente dal database
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato: " + username));

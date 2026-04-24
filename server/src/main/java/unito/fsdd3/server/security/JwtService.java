@@ -15,9 +15,14 @@ import io.jsonwebtoken.security.Keys;
 public class JwtService {
 
     private final SecretKey key;
+    private final long expirationMs;
 
-    public JwtService(@Value("${app.jwt.secret}") String secret) {
+
+      public JwtService(
+            @Value("${app.jwt.secret}") String secret,
+            @Value("${app.jwt.expiration-ms}") long expirationMs) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        this.expirationMs = expirationMs;
     }
 
     public String generateToken(String username, String role) {
@@ -27,11 +32,11 @@ public class JwtService {
                 .subject(username)
                 .claim("role", role)
                 .issuedAt(new Date(now))
-                .expiration(new Date(now + 1000L * 60 * 60 * 8))
+                .expiration(new Date(now + expirationMs))
                 .signWith(key)
                 .compact();
     }
-
+    
     public String extractUsername(String token) {
         return parse(token).getPayload().getSubject();
     }

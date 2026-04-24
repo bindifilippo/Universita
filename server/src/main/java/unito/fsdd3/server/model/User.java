@@ -17,8 +17,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    //il ruolo viene salvato come stringa 
     @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
+    
     private Role role;
 
     public User() {
