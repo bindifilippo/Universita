@@ -41,6 +41,18 @@ public class JwtService {
         return parse(token).getPayload().getSubject();
     }
 
+     public String extractTokenType(String token) {
+        return parse(token).getPayload().get("type", String.class);
+    }
+
+    public boolean isAccessToken(String token) {
+        return "access".equals(extractTokenType(token));
+    }
+
+    public boolean isRefreshToken(String token) {
+        return "refresh".equals(extractTokenType(token));
+    }
+
     public boolean isTokenValid(String token) {
         try {
             parse(token);
