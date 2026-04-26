@@ -31,10 +31,10 @@ public class SecurityConfig {
         http
             .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
-            //il server non mantiene una sessione utente salvata in memoria tra una richiesta e l’altra.
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/auth/login", "/auth/refresh", "/auth/logout").permitAll()
+                .requestMatchers("/auth/me").authenticated()
                 .requestMatchers("/corsi/**").hasAnyRole("PRESIDE", "INSEGNANTE", "STUDENTE")
                 .requestMatchers("/insegnanti/**").hasAnyRole("PRESIDE", "INSEGNANTE")
                 .requestMatchers("/studenti/**").hasAnyRole("PRESIDE", "INSEGNANTE")

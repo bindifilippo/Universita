@@ -8,40 +8,58 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
 
     private final SecretKey key;
-    private final long expirationMs;
+    private final long accessExpirationMs;
+    private final long refreshExpirationMs;
 
-
-      public JwtService(
+    public JwtService(
             @Value("${app.jwt.secret}") String secret,
-            @Value("${app.jwt.expiration-ms}") long expirationMs) {
+            @Value("${app.jwt.access-expiration-ms}") long accessExpirationMs,
+            @Value("${app.jwt.refresh-expiration-ms}") long refreshExpirationMs) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        this.expirationMs = expirationMs;
+        this.accessExpirationMs = accessExpirationMs;
+        this.refreshExpirationMs = refreshExpirationMs;
     }
 
-    public String generateToken(String username, String role) {
+    public String generateAccessToken(String username, String role) {
         long now = System.currentTimeMillis();
 
         return Jwts.builder()
                 .subject(username)
                 .claim("role", role)
+                .claim("type", "access")
                 .issuedAt(new Date(now))
-                .expiration(new Date(now + expirationMs))
+                .expiration(new Date(now + accessExpirationMs))
                 .signWith(key)
                 .compact();
     }
-    
+
+    public String generateRefreshToken(String username) {
+        long now = System.currentTimeMillis();
+
+        return Jwts.builder()
+                .subject(username)
+                .claim("type", "refresh")
+                .issuedAt(new Date(now))
+                .expiration(new Date(now + refreshExpirationMs))
+                .signWith(key)
+                .compact();
+    }
+
     public String extractUsername(String token) {
         return parse(token).getPayload().getSubject();
     }
 
-     public String extractTokenType(String token) {
+    public String extractTokenType(String token) {
         return parse(token).getPayload().get("type", String.class);
     }
 
