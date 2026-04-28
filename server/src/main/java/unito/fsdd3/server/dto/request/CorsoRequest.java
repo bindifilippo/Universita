@@ -19,6 +19,9 @@ public class CorsoRequest {
 
     private String descrizione;
 
+    private Integer insegnanteId;
+
+
     public String getTitolo() {
         return titolo;
     }
@@ -57,5 +60,13 @@ public class CorsoRequest {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public Integer getInsegnanteId() {
+        return insegnanteId;
+    }
+
+    public void setInsegnanteId(Integer insegnanteId) {
+        this.insegnanteId = insegnanteId;
     }
 }

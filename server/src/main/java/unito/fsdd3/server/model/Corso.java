@@ -4,9 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Corso {
+
+    @ManyToOne
+    @JoinColumn(name = "insegnante_id")
+    private Insegnante insegnante;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,5 +77,13 @@ public class Corso {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public Insegnante getInsegnante() {
+    return insegnante;
+    }
+
+    public void setInsegnante(Insegnante insegnante) {
+        this.insegnante = insegnante;
     }
 }

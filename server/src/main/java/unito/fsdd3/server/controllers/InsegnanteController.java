@@ -26,14 +26,11 @@ public class InsegnanteController {
         Insegnante insegnante = new Insegnante();
         insegnante.setNome(request.getNome());
         insegnante.setCognome(request.getCognome());
+        insegnante.setEmail(request.getEmail());
 
         Insegnante salvato = insegnanteService.creaInsegnante(insegnante);
 
-        InsegnanteResponse response = new InsegnanteResponse(
-                salvato.getId(),
-                salvato.getNome(),
-                salvato.getCognome()
-        );
+        InsegnanteResponse response = toResponse(salvato);
 
         return ResponseEntity.status(201).body(response);
     }
@@ -43,11 +40,7 @@ public class InsegnanteController {
         List<Insegnante> insegnanti = insegnanteService.trovaTuttiGliInsegnanti();
 
         List<InsegnanteResponse> response = insegnanti.stream()
-                .map(insegnante -> new InsegnanteResponse(
-                        insegnante.getId(),
-                        insegnante.getNome(),
-                        insegnante.getCognome()
-                ))
+                .map(this::toResponse)
                 .toList();
 
         return ResponseEntity.ok(response);
@@ -61,13 +54,7 @@ public class InsegnanteController {
             return ResponseEntity.notFound().build();
         }
 
-        InsegnanteResponse response = new InsegnanteResponse(
-                insegnante.getId(),
-                insegnante.getNome(),
-                insegnante.getCognome()
-        );
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(toResponse(insegnante));
     }
 
     @PutMapping("/{id}")
@@ -78,6 +65,7 @@ public class InsegnanteController {
         Insegnante insegnanteAggiornato = new Insegnante();
         insegnanteAggiornato.setNome(request.getNome());
         insegnanteAggiornato.setCognome(request.getCognome());
+        insegnanteAggiornato.setEmail(request.getEmail());
 
         Insegnante insegnante = insegnanteService.aggiornaInsegnante(id, insegnanteAggiornato);
 
@@ -85,18 +73,21 @@ public class InsegnanteController {
             return ResponseEntity.notFound().build();
         }
 
-        InsegnanteResponse response = new InsegnanteResponse(
-                insegnante.getId(),
-                insegnante.getNome(),
-                insegnante.getCognome()
-        );
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(toResponse(insegnante));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminaInsegnante(@PathVariable Integer id) {
         insegnanteService.eliminaInsegnante(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private InsegnanteResponse toResponse(Insegnante insegnante) {
+        return new InsegnanteResponse(
+                insegnante.getId(),
+                insegnante.getNome(),
+                insegnante.getCognome(),
+                insegnante.getEmail()
+        );
     }
 }

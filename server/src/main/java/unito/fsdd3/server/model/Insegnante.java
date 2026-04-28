@@ -9,6 +9,7 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Insegnante {
+
     @OneToOne
     @JoinColumn(name = "user_id", unique = true)
     private User user;
@@ -16,15 +17,18 @@ public class Insegnante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
     private String cognome;
+    private String email;
 
-    public Insegnante(){
+    public Insegnante() {
     }
 
-    public Insegnante(String nome, String cognome){
+    public Insegnante(String nome, String cognome, String email) {
         this.nome = nome;
         this.cognome = cognome;
+        this.email = email;
     }
 
     public Integer getId() {
@@ -51,8 +55,16 @@ public class Insegnante {
         this.cognome = cognome;
     }
 
-     public User getUser() {
-    return user;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void setUser(User user) {

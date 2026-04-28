@@ -8,6 +8,7 @@ public class CorsoResponse {
     private String livello;
     private String stato;
     private String descrizione;
+    private InsegnanteResponse insegnante;
 
     public CorsoResponse(
             Integer id,
@@ -15,13 +16,15 @@ public class CorsoResponse {
             Integer annoCreazione,
             String livello,
             String stato,
-            String descrizione) {
+            String descrizione,
+            InsegnanteResponse insegnante) {
         this.id = id;
         this.titolo = titolo;
         this.annoCreazione = annoCreazione;
         this.livello = livello;
         this.stato = stato;
         this.descrizione = descrizione;
+        this.insegnante = insegnante;
     }
 
     public Integer getId() {
@@ -46,5 +49,13 @@ public class CorsoResponse {
 
     public String getDescrizione() {
         return descrizione;
+    }
+
+    public InsegnanteResponse getInsegnante() {
+        return insegnante;
+    }
+
+    public void setInsegnante(InsegnanteResponse insegnante) {
+        this.insegnante = insegnante;
     }
 }

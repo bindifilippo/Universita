@@ -8,6 +8,7 @@ import unito.fsdd3.server.dto.request.CorsoRequest;
 import unito.fsdd3.server.dto.response.CorsoResponse;
 import unito.fsdd3.server.model.Corso;
 import unito.fsdd3.server.service.CorsoService;
+import unito.fsdd3.server.dto.response.InsegnanteResponse;
 
 import java.util.List;
 
@@ -30,15 +31,9 @@ public class CorsoController {
                 request.getStato(),
                 request.getDescrizione());
 
-        Corso salvato = corsoService.creaCorso(corso);
+        Corso salvato = corsoService.creaCorso(corso, request.getInsegnanteId());
 
-        CorsoResponse response = new CorsoResponse(
-                salvato.getId(),
-                salvato.getTitolo(),
-                salvato.getAnnoCreazione(),
-                salvato.getLivello(),
-                salvato.getStato(),
-                salvato.getDescrizione());
+        CorsoResponse response = toResponse(salvato);
 
         return ResponseEntity.ok(response);
     }
@@ -48,13 +43,7 @@ public class CorsoController {
         List<Corso> corsi = corsoService.trovaTuttiICorsi();
 
         List<CorsoResponse> response = corsi.stream()
-                .map(corso -> new CorsoResponse(
-                        corso.getId(),
-                        corso.getTitolo(),
-                        corso.getAnnoCreazione(),
-                        corso.getLivello(),
-                        corso.getStato(),
-                        corso.getDescrizione()))
+                .map(this::toResponse)
                 .toList();
 
         return ResponseEntity.ok(response);
@@ -68,13 +57,7 @@ public class CorsoController {
             return ResponseEntity.notFound().build();
         }
 
-        CorsoResponse response = new CorsoResponse(
-                corso.getId(),
-                corso.getTitolo(),
-                corso.getAnnoCreazione(),
-                corso.getLivello(),
-                corso.getStato(),
-                corso.getDescrizione());
+        CorsoResponse response = toResponse(corso);
 
         return ResponseEntity.ok(response);
     }
@@ -91,19 +74,13 @@ public class CorsoController {
                 request.getStato(),
                 request.getDescrizione());
 
-        Corso corso = corsoService.aggiornaCorso(id, corsoAggiornato);
+        Corso corso = corsoService.aggiornaCorso(id, corsoAggiornato, request.getInsegnanteId());
 
         if (corso == null) {
             return ResponseEntity.notFound().build();
         }
 
-        CorsoResponse response = new CorsoResponse(
-                corso.getId(),
-                corso.getTitolo(),
-                corso.getAnnoCreazione(),
-                corso.getLivello(),
-                corso.getStato(),
-                corso.getDescrizione());
+        CorsoResponse response = toResponse(corso);
 
         return ResponseEntity.ok(response);
     }
@@ -112,5 +89,28 @@ public class CorsoController {
     public ResponseEntity<Void> eliminaCorso(@PathVariable Integer id) {
         corsoService.eliminaCorso(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private CorsoResponse toResponse(Corso corso) {
+    InsegnanteResponse insegnanteResponse = null;
+
+    if (corso.getInsegnante() != null) {
+        insegnanteResponse = new InsegnanteResponse(
+                corso.getInsegnante().getId(),
+                corso.getInsegnante().getNome(),
+                corso.getInsegnante().getCognome(),
+                corso.getInsegnante().getEmail()
+        );
+    }
+
+    return new CorsoResponse(
+            corso.getId(),
+            corso.getTitolo(),
+            corso.getAnnoCreazione(),
+            corso.getLivello(),
+            corso.getStato(),
+            corso.getDescrizione(),
+            insegnanteResponse
+    );
     }
 }

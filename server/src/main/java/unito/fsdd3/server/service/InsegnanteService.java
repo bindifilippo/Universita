@@ -39,6 +39,7 @@ public class InsegnanteService {
 
         insegnanteEsistente.setNome(insegnanteAggiornato.getNome());
         insegnanteEsistente.setCognome(insegnanteAggiornato.getCognome());
+        insegnanteEsistente.setEmail(insegnanteAggiornato.getEmail());
 
         return insegnanteRepository.save(insegnanteEsistente);
     }
