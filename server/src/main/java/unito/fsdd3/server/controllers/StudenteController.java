@@ -1,16 +1,15 @@
 package unito.fsdd3.server.controllers;
 
+import java.util.List;
+
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import unito.fsdd3.server.dto.request.StudenteRequest;
 import unito.fsdd3.server.dto.response.StudenteResponse;
 import unito.fsdd3.server.model.Studente;
 import unito.fsdd3.server.service.StudenteService;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/studenti")
@@ -22,25 +21,12 @@ public class StudenteController {
         this.studenteService = studenteService;
     }
 
-    @PostMapping
-    public ResponseEntity<StudenteResponse> creaStudente(@Valid @RequestBody StudenteRequest request) {
-        Studente studente = new Studente();
-        studente.setNome(request.getNome());
-        studente.setCognome(request.getCognome());
-        studente.setGenere(request.getGenere());
-
-        Studente salvato = studenteService.creaStudente(studente);
-
-        StudenteResponse response = toResponse(salvato);
-        return ResponseEntity.status(201).body(response);
-    }
-
     @GetMapping
     public ResponseEntity<List<StudenteResponse>> getTuttiGliStudenti() {
         List<StudenteResponse> response = studenteService.trovaTuttiGliStudenti()
                 .stream()
                 .map(this::toResponse)
-                .collect(Collectors.toList());
+                .toList();
 
         return ResponseEntity.ok(response);
     }
@@ -54,6 +40,18 @@ public class StudenteController {
         }
 
         return ResponseEntity.ok(toResponse(studente));
+    }
+
+    @PostMapping
+    public ResponseEntity<StudenteResponse> creaStudente(@Valid @RequestBody StudenteRequest request) {
+        Studente studente = new Studente();
+        studente.setNome(request.getNome());
+        studente.setCognome(request.getCognome());
+        studente.setGenere(request.getGenere());
+
+        Studente salvato = studenteService.creaStudente(studente);
+
+        return ResponseEntity.ok(toResponse(salvato));
     }
 
     @PutMapping("/{id}")
@@ -83,6 +81,10 @@ public class StudenteController {
 
     private StudenteResponse toResponse(Studente studente) {
         return new StudenteResponse(
-        ); 
+                studente.getId(),
+                studente.getNome(),
+                studente.getCognome(),
+                studente.getGenere()
+        );
     }
 }
