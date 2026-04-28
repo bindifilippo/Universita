@@ -2,6 +2,7 @@ package unito.fsdd3.server.security;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
@@ -49,6 +50,7 @@ public class JwtService {
         return Jwts.builder()
                 .subject(username)
                 .claim("type", "refresh")
+                .claim("jti", UUID.randomUUID().toString())
                 .issuedAt(new Date(now))
                 .expiration(new Date(now + refreshExpirationMs))
                 .signWith(key)

@@ -54,4 +54,8 @@ public class RefreshTokenService {
         revokeToken(oldToken);
         return createRefreshToken(oldToken.getUser(), newTokenValue);
     }
+
+    public Optional<RefreshToken> findByTokenWithUser(String token) {
+        return refreshTokenRepository.findByTokenWithUser(token);
+    }
 }

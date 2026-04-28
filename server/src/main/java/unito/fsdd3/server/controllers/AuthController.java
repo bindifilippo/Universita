@@ -101,8 +101,8 @@ public class AuthController {
             return unauthorizedAndClearCookies();
         }
 
-        RefreshToken storedToken = refreshTokenService.findByToken(refreshTokenValue)
-                .orElse(null);
+        RefreshToken storedToken = refreshTokenService.findByTokenWithUser(refreshTokenValue)
+        .orElse(null);
 
         if (storedToken == null) {
             return unauthorizedAndClearCookies();
