@@ -5,16 +5,19 @@ public class StudenteResponse {
     private Integer id;
     private String nome;
     private String cognome;
+    private Integer eta;
     private String genere;
 
     public StudenteResponse() {
     }
 
-    public StudenteResponse(Integer id, String nome, String cognome, String genere) {
+    public StudenteResponse(Integer id, String nome, String cognome, String genere, Integer eta) {
         this.id = id;
         this.nome = nome;
         this.cognome = cognome;
         this.genere = genere;
+        this.eta = eta;
+
     }
 
     public Integer getId() {
@@ -47,5 +50,13 @@ public class StudenteResponse {
 
     public void setGenere(String genere) {
         this.genere = genere;
+    }
+
+    public Integer getEta(){
+        return eta;
+    }
+
+    public void setEta(Integer eta){
+        this.eta = eta;
     }
 }

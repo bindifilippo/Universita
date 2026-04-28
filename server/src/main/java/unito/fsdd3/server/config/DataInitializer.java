@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import unito.fsdd3.server.model.Studente;
 import unito.fsdd3.server.model.User;
+import unito.fsdd3.server.repository.StudenteRepository;
 import unito.fsdd3.server.repository.UserRepository;
 import unito.fsdd3.server.security.Role;
 
@@ -13,7 +15,7 @@ import unito.fsdd3.server.security.Role;
 public class DataInitializer {
 
     @Bean
-    CommandLineRunner initUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    CommandLineRunner initUsers(UserRepository userRepository, PasswordEncoder passwordEncoder, StudenteRepository studenteRepository) {
         return args -> {
             if (!userRepository.existsByUsername("preside")) {
                 userRepository.save(new User(
@@ -37,6 +39,15 @@ public class DataInitializer {
                         passwordEncoder.encode("studente123"),
                         Role.ROLE_STUDENTE
                 ));
+            }
+
+            if (studenteRepository.count() == 0) {
+                Studente studente = new Studente();
+                studente.setNome("Mario");
+                studente.setCognome("Rossi");
+                studente.setEta(24);
+                studente.setGenere("M");
+                studenteRepository.save(studente);
             }
         };
     }

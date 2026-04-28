@@ -48,6 +48,7 @@ public class StudenteController {
         studente.setNome(request.getNome());
         studente.setCognome(request.getCognome());
         studente.setGenere(request.getGenere());
+        studente.setEta(request.getEta());
 
         Studente salvato = studenteService.creaStudente(studente);
 
@@ -63,6 +64,7 @@ public class StudenteController {
         studenteAggiornato.setNome(request.getNome());
         studenteAggiornato.setCognome(request.getCognome());
         studenteAggiornato.setGenere(request.getGenere());
+        studenteAggiornato.setEta(request.getEta());
 
         Studente studente = studenteService.aggiornaStudente(id, studenteAggiornato);
 
@@ -84,7 +86,8 @@ public class StudenteController {
                 studente.getId(),
                 studente.getNome(),
                 studente.getCognome(),
-                studente.getGenere()
+                studente.getGenere(),
+                studente.getEta()
         );
     }
 }

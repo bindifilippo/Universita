@@ -1,6 +1,7 @@
 package unito.fsdd3.server.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class StudenteRequest {
 
@@ -10,7 +11,9 @@ public class StudenteRequest {
     @NotBlank(message = "Il cognome non può essere vuoto")
     private String cognome;
 
-    @NotBlank(message = "Il genere non può essere vuoto")
+    @NotNull (message = "L'età non può essere vuota")
+    private Integer eta;
+
     private String genere;
 
     public StudenteRequest() {
@@ -38,5 +41,13 @@ public class StudenteRequest {
 
     public void setGenere(String genere) {
         this.genere = genere;
+    }
+
+     public Integer getEta(){
+        return eta;
+    }
+
+    public void setEta(Integer eta){
+        this.eta = eta;
     }
 }

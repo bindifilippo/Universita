@@ -4,9 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Insegnante {
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +49,13 @@ public class Insegnante {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+     public User getUser() {
+    return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
